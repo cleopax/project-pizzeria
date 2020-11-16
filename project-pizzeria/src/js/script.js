@@ -61,6 +61,72 @@
       console.log('new Product:', thisProduct);
     }
 
+    getElements(){
+      const thisProduct = this;
+    
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    }
+
+    event.preventDefault();
+
+    initOrderForm();
+
+    thisProduct.form.addEventListener('submit', function(event){
+      event.preventDefault();
+      thisProduct.processOrder();
+    });
+    
+    for(let input of thisProduct.formInputs){
+      input.addEventListener('change', function(){
+        thisProduct.processOrder();
+      });
+    }
+    
+    thisProduct.cartButton.addEventListener('click', function(event){
+      event.preventDefault();
+      thisProduct.processOrder();
+    });
+
+    console.log()
+
+    processOrder(){
+      const thisProduct = this;
+    
+      /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
+    
+      /* set variable price to equal thisProduct.data.price */
+    
+      /* START LOOP: for each paramId in thisProduct.data.params */
+        /* save the element in thisProduct.data.params with key paramId as const param */
+    
+        /* START LOOP: for each optionId in param.options */
+          /* save the element in param.options with key optionId as const option */
+    
+          /* START IF: if option is selected and option is not default */
+            /* add price of option to variable price */
+          /* END IF: if option is selected and option is not default */
+          /* START ELSE IF: if option is not selected and option is default */
+            /* deduct price of option from price */
+          }
+          /* END ELSE IF: if option is not selected and option is default */
+        }
+        /* END LOOP: for each optionId in param.options */
+      }
+      /* END LOOP: for each paramId in thisProduct.data.params */
+    
+      /* set the contents of thisProduct.priceElem to be the value of variable price */
+    }
+
+    const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+
+/* START IF: if option is selected and option is not default */
+if(optionSelected && !option.default){
+  // ...
+  
     renderInMenu(){
       const thisProduct = this;
 
