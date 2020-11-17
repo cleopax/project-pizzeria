@@ -58,12 +58,14 @@
       thisProduct.data = data;
       thisProduct.renderInMenu();
       thisProduct.initAcordion();
+      thisProduct.getElements();
+      thisProduct.initOrderForm();
       console.log('new Product:', thisProduct);
     }
 
     getElements(){
       const thisProduct = this;
-    
+
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
@@ -71,62 +73,66 @@
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
     }
 
-    event.preventDefault();
+    initOrderForm() {
 
-    initOrderForm();
+      const thisProduct = this;
 
-    thisProduct.form.addEventListener('submit', function(event){
-      event.preventDefault();
-      thisProduct.processOrder();
-    });
-    
-    for(let input of thisProduct.formInputs){
-      input.addEventListener('change', function(){
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
         thisProduct.processOrder();
       });
-    }
-    
-    thisProduct.cartButton.addEventListener('click', function(event){
-      event.preventDefault();
-      thisProduct.processOrder();
-    });
 
-    console.log()
+      for(let input of thisProduct.formInputs){
+        input.addEventListener('change', function(){
+          thisProduct.processOrder();
+        });
+      }
+
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+    }
 
     processOrder(){
       const thisProduct = this;
-    
+
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
-    
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log(thisProduct.form, formData, thisProduct.data);
+
       /* set variable price to equal thisProduct.data.price */
-    
+      let price = thisProduct.data.price;
+
       /* START LOOP: for each paramId in thisProduct.data.params */
-        /* save the element in thisProduct.data.params with key paramId as const param */
-    
+      for(const paramId in thisProduct.data.params) {
+      /* save the element in thisProduct.data.params with key paramId as const param */
+
+        const param = thisProduct.data.params[paramId];
+        console.log('Katergoria', paramId, param);
+
         /* START LOOP: for each optionId in param.options */
-          /* save the element in param.options with key optionId as const option */
-    
-          /* START IF: if option is selected and option is not default */
-            /* add price of option to variable price */
-          /* END IF: if option is selected and option is not default */
-          /* START ELSE IF: if option is not selected and option is default */
-            /* deduct price of option from price */
+        for(const optionId in param.options) {
+      /* save the element in param.options with key optionId as const option */
+          const option = param.options[optionId];
+          console.log(optionId, option);
+
+          if(formData[paramId].includes(optionId) && !option.default) {
+            price += option.price;
           }
-          /* END ELSE IF: if option is not selected and option is default */
+          else if(!formData[paramId].includes(optionId) && option.default) {
+            price -= option.price;
+          }
+
         }
-        /* END LOOP: for each optionId in param.options */
-      }
       /* END LOOP: for each paramId in thisProduct.data.params */
-    
+      }
       /* set the contents of thisProduct.priceElem to be the value of variable price */
+      thisProduct.priceElem.innerHTML = price;
     }
+    // ...
 
-    const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
-
-/* START IF: if option is selected and option is not default */
-if(optionSelected && !option.default){
-  // ...
-  
     renderInMenu(){
       const thisProduct = this;
 
@@ -185,7 +191,6 @@ if(optionSelected && !option.default){
     initMenu: function(){
       const thisApp = this;
       for(let productData in thisApp.data.products){
-        debugger;
         new Product(productData, thisApp.data.products[productData]);
       }
 
