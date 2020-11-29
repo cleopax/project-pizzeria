@@ -61,6 +61,7 @@
       thisProduct.getElements();
       thisProduct.initOrderForm();
       console.log('new Product:', thisProduct);
+      thisProduct.processOrder();
     }
 
     getElements(){
@@ -71,6 +72,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initOrderForm() {
@@ -100,7 +102,6 @@
 
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log(thisProduct.form, formData, thisProduct.data);
 
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
@@ -110,13 +111,12 @@
       /* save the element in thisProduct.data.params with key paramId as const param */
 
         const param = thisProduct.data.params[paramId];
-        console.log('Katergoria', paramId, param);
+        if(!formData[paramId]) formData[paramId] = []
 
         /* START LOOP: for each optionId in param.options */
         for(const optionId in param.options) {
-      /* save the element in param.options with key optionId as const option */
+          /* save the element in param.options with key optionId as const option */
           const option = param.options[optionId];
-          console.log(optionId, option);
 
           if(formData[paramId].includes(optionId) && !option.default) {
             price += option.price;
@@ -125,13 +125,24 @@
             price -= option.price;
           }
 
+          const selector = '.' + paramId + '-' + optionId;
+          const image = thisProduct.element.querySelector(selector)
+
+          if(image) {
+            if(formData[paramId].includes(optionId)) {
+              image.classList.add('active');
+            }
+            else {
+              image.classList.remove('active');
+            }
+          }
+
         }
       /* END LOOP: for each paramId in thisProduct.data.params */
       }
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = price;
     }
-    // ...
 
     renderInMenu(){
       const thisProduct = this;
@@ -180,6 +191,7 @@
 
           /* END: if the active product isn't the element of thisProduct */
           }
+          classNames.menuProduct.imageVisible
         /* END LOOP: for each active product */
         }
       /* END: click event listener to trigger */
