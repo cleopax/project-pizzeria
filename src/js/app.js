@@ -1,8 +1,8 @@
-import {settings, select, templates, classNames} from './settings';
+import {settings,select,classNames} from './settings.js';
 import Product from './components/Products.js';
-import Cart from ' ./components/Cart.js';
-import AmountWidget from ' ./components/AmountWidget.js';
-import CartProduct from ' ./components/CartProduct.js';
+import Cart from './components/Cart.js';
+import AmountWidget from './components/AmountWidget.js';
+import CartProduct from './components/CartProduct.js';
   
 const app = {
     initMenu: function(){
@@ -23,9 +23,7 @@ const app = {
 
       thisApp.productsList.addEventListener('add-to-cart', function(event){
         app.cart.add(event.detail.Product);
-      )};
-
-
+      )},
     },
 
     init: function(){

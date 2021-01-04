@@ -1,4 +1,4 @@
-import {select, classNames, templates, settings} from './settigs.js';
+import {select, classNames, templates} from './settigs.js';
 import utils from './utils.js';
 import AmountWidget from './components/AmountWidget.js';
 
