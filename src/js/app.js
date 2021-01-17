@@ -75,7 +75,6 @@ const app = {
     for(let productData in thisApp.data.products){
       new Product(productData, thisApp.data.products[productData]);
     }
-
   },
 
   initCart: function() {

@@ -1,6 +1,4 @@
-import {
-  select,
-} from '../settings.js';
+import {select} from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 
 class CartProduct {
@@ -40,8 +38,22 @@ class CartProduct {
       thisCartProduct.amount = thisCartProduct.amountWidget.value;
       thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
       thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
-    }
-    );
+    });
+  }
+
+  remove() {
+    const thisCartProduct = this;
+
+    const event = new CustomEvent('remove', {
+      bubbles: true,
+      detail: {
+        cartProduct: thisCartProduct,
+      },
+    });
+
+    thisCartProduct.dom.wrapper.dispatchEvent(event);
+
+    //console.log('remove');
   }
 
   initActions() {
@@ -55,6 +67,19 @@ class CartProduct {
       thisCartProduct.dom.wrapper.dispatchEvent(event);
       thisCartProduct.dom.wrapper.remove();
     });
+  }
+
+  getData() {
+
+    const thisCartProduct = this;
+
+    return {
+      id: thisCartProduct.id,
+      amount: thisCartProduct.amount,
+      price: thisCartProduct.price,
+      priceSingle: thisCartProduct.priceSingle,
+      params: thisCartProduct.params,
+    };
   }
 }
 

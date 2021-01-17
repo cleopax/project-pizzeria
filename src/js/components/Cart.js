@@ -1,9 +1,4 @@
-import {
-  templates,
-  select,
-  classNames,
-  settings
-} from '../settings.js';
+import {templates, select, classNames, settings} from '../settings.js';
 import utils from '../utils.js';
 import CartProduct from './CartProduct.js';
 
@@ -99,7 +94,84 @@ class Cart {
 
     thisCart.update();
 
-    console.log('Menu product', menuProduct);
+    // console.log('Menu product', menuProduct);
+  }
+
+  update() {
+    const thisCart = this;
+
+    thisCart.totalNumber = 0;
+    thisCart.subtotalPrice = 0;
+
+    for (let product of thisCart.products) {
+      thisCart.subtotalPrice += product.price;
+      thisCart.totalNumber += product.amount;
+    }
+
+    thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+
+    for (let key of thisCart.renderTotalsKeys) {
+      //  console.log('key', key);
+      for (let elem of thisCart.dom[key]) {
+        elem.innerHTML = thisCart[key];
+        console.log('thisCart[key]', thisCart[key]);
+        //  console.log('elem', elem);
+      }
+    }
+
+    // console.log('sp', subtotalPrice);
+    //console.log('tn', thisCart.totalNumber);
+    // console.log('total', thisCart.totalPrice);
+    //console.log('thisCart.products', thisCart.products);
+  }
+
+  remove(cartProduct) {
+    const thisCart = this;
+
+    console.log('thisCart.products', thisCart.products);
+
+    const index = thisCart.products.indexOf(cartProduct);
+
+    thisCart.products.splice(index, 1);
+
+    cartProduct.dom.wrapper.remove();
+
+    thisCart.update();
+  }
+
+  sendOrder() {
+    const thisCart = this;
+
+    const url = settings.db.url + '/' + settings.db.order;
+
+    const payload = {
+      address: thisCart.dom.address.value,
+      phone: thisCart.dom.phone.value,
+      totalPrice: thisCart.totalPrice,
+      subtotalPrice: thisCart.subtotalPrice,
+      totalNumber: thisCart.totalNumber,
+      deliveryFee: thisCart.deliveryFee,
+      products: [],
+    };
+
+    for (let product of thisCart.products) {
+      payload.products.push(product.getData());
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options)
+      .then(function (response) {
+        return response.json();
+      }).then(function (parsedResponse) {
+        console.log('parsedResponse send', parsedResponse);
+      });
   }
 }
 

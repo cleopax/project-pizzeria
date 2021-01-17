@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,8 @@
   <title>Pizzeria</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -58,15 +61,108 @@
       </div>
     </div>
   </header>
-
-  <div id="pages">
-    <section id="order">
-      <div id="product-list" class="product-list container"></div>
-    </section>
-    <section id="booking">
-      <div class="booking-wrapper container"></div>
-    </section>
-  </div>
+ <!--<div id="product-list" class="product-list container"></div>-->
+ <div id="pages">
+  <section id="home" class="mainSiteWrapper">
+    <div class="siteWrapper">
+      <div class="containerSite wrapOrder">
+        <a href="#order">order online</a>
+        <p class="move">Delicious food delivered to you door</p>
+      </div>
+      <div class="containerSite wrapBook">
+        <a href="#/booking">book a table</a>
+        <p class="move">book a table today.</p>
+      </div>
+      <div class="openingHours">
+        <h2>opening hours</h2>
+        <p>tue-sun, 12pm-12am</p>
+      </div>
+    </div>
+    <div class="siteWrapper review">
+      <div class="imgContainer">
+        <img src="/images/assets/pizza-3.jpg" alt="">
+      </div>
+      <div class="textReview">
+          <div class="reviews review-1 activeText">
+            <h3>Amazing service!</h3>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda repellendus dolorem dolorum alias.</p>
+          </div>
+          <div class="reviews review-2">
+            <h3>Order online!</h3>
+            <p>Praesent convallis euismod est in iaculis. Maecenas eget massa vitae metus pulvinar molestie. Morbi quis pretium diam.</p>
+          </div>
+          <div class="reviews review-2">
+            <h3>Book a table!</h3>
+            <p>Sed sollicitudin, urna at cursus commodo, magna augue ultricies ligula, et hendrerit purus ex lobortis lorem. Aliquam eros velit, congue non mattis eget, finibus vitae lorem.</p>
+          </div>
+      </div>
+      <div class="reviewMark">
+        <div class="activeMark"></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="gallery">
+      <div class="imgContainer">
+        <img src="/images/assets/pizza-4.jpg" alt="">
+        <div class="cover"></div>
+        <div class="icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-share-alt"></i>
+        </div>
+      </div>
+      <div class="imgContainer">
+        <img src="/images/assets/pizza-5.jpg" alt="">
+        <div class="cover"></div>
+        <div class="icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-share-alt"></i>
+        </div>
+      </div>
+      <div class="imgContainer">
+        <img src="/images/assets/pizza-6.jpg" alt="">
+        <div class="cover"></div>
+        <div class="icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-share-alt"></i>
+        </div>
+      </div>
+      <div class="imgContainer">
+        <img src="/images/assets/pizza-7.jpg" alt="">
+        <div class="cover"></div>
+        <div class="icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-share-alt"></i>
+        </div>
+      </div>
+      <div class="imgContainer">
+        <img src="/images/assets/pizza-8.jpg" alt="">
+        <div class="cover"></div>
+        <div class="icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-share-alt"></i>
+        </div>
+      </div>
+      <div class="imgContainer">
+        <img src="/images/assets/pizza-9.jpg" alt="">
+        <div class="cover"></div>
+        <div class="icons">
+          <i class="fas fa-heart"></i>
+          <i class="fas fa-share-alt"></i>
+        </div>
+      </div>
+    </div>
+    <div class="moreOnInstagram">
+      <a href="#">View more on Instagram</a>
+    </div>
+  </section>
+  <section id="order">
+    <div id="product-list" class="product-list container"></div>
+  </section>
+  <section id="booking">
+    <div class="booking-wrapper container"></div>
+  </section>
+</div>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">
@@ -244,6 +340,8 @@
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="/vendor/range-slider.min.js"></script>
   <script src="js/app.js" type="module"></script>
 </body>
 </html>
