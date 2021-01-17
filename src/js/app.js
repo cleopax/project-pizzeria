@@ -1,7 +1,7 @@
 import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
-import Booking from './components/Booking.js'
+import Booking from './components/Booking.js';
   
 const app = {
   initPages: function(){
@@ -24,21 +24,21 @@ const app = {
     
     thisApp.activatePage(pageMatchingHash);
 
-    for(let link of thisApp.navlinks){
+    for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
         const clickedElement = this;
         event.preventDefault();
 
-          /* get page id from href attributr */
-          const id = clickedElement.getAttribute ('href').replace('#', '');
+        /* get page id from href attributr */
+        const id = clickedElement.getAttribute ('href').replace('#', '');
 
-          /* run thisApp.activatePage with that id */
-          thisApp.activatePage(id);
+        /* run thisApp.activatePage with that id */
+        thisApp.activatePage(id);
 
-          /* change URL hash */
-          window.location.hash = '#/' + id;
+        /* change URL hash */
+        window.location.hash = '#/' + id;
 
-      })
+      });
     }
   },
 
@@ -52,22 +52,22 @@ const app = {
 
     /* add class "active" to matching links, remove from non-matching */
     for(let link of thisApp.navLinks){
-      links.classList.toggle(
+      link.classList.toggle(
         classNames.nav.active, 
         link.getAttribute('href') == '#' + pageId
-        );
+      );
     }
-  }
+  },
 
   initBooking() {
     const thisApp = this;
 
     /* find booking-wrapper container */
-    thisApp.widgetOrderSite = document.querySelector(select.containerOf.booking);
+    thisApp.bookingContainer = document.querySelector(select.containerOf.booking);
     //console.log('thisApp.widgetOrderSite',thisApp.widgetOrderSite);
 
     /* creating new instance of Booking class*/
-    thisApp.bookingObj = new Booking(thisApp.widgetOrderSite);
+    thisApp.booking = new Booking(thisApp.bookingContainer);
   },
 
   initMenu: function(){
@@ -102,6 +102,7 @@ const app = {
 
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initBooking();
   },
 
   initData: function(){
