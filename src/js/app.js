@@ -2,6 +2,7 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Carousel from './components/Carousel.js';
   
 const app = {
   initPages: function(){
@@ -90,6 +91,10 @@ const app = {
     });
   },
 
+  initHome: function() {
+    new Carousel();
+  },
+
   init: function(){
     const thisApp = this;
     //console.log('*** App starting ***');
@@ -102,6 +107,7 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initHome();
   },
 
   initData: function(){

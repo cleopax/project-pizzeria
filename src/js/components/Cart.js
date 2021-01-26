@@ -97,34 +97,6 @@ class Cart {
     // console.log('Menu product', menuProduct);
   }
 
-  update() {
-    const thisCart = this;
-
-    thisCart.totalNumber = 0;
-    thisCart.subtotalPrice = 0;
-
-    for (let product of thisCart.products) {
-      thisCart.subtotalPrice += product.price;
-      thisCart.totalNumber += product.amount;
-    }
-
-    thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
-
-    for (let key of thisCart.renderTotalsKeys) {
-      //  console.log('key', key);
-      for (let elem of thisCart.dom[key]) {
-        elem.innerHTML = thisCart[key];
-        console.log('thisCart[key]', thisCart[key]);
-        //  console.log('elem', elem);
-      }
-    }
-
-    // console.log('sp', subtotalPrice);
-    //console.log('tn', thisCart.totalNumber);
-    // console.log('total', thisCart.totalPrice);
-    //console.log('thisCart.products', thisCart.products);
-  }
-
   remove(cartProduct) {
     const thisCart = this;
 

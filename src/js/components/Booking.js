@@ -1,7 +1,6 @@
 import {templates, select, settings, classNames} from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 import utils from '../utils.js';
-import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';  
   
@@ -43,7 +42,7 @@ class Booking {
       ],
     };
 
-    // console.log('params',params)
+    // console.log('getDataparams',params)
 
     const urls = {
       booking: settings.db.url + '/' + settings.db.booking
@@ -54,7 +53,7 @@ class Booking {
                                + '?' + params.eventsRepeat.join('&'),
     };
 
-    //console.log('urls', urls);
+    //console.log('getData urls', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -188,7 +187,7 @@ class Booking {
     thisBooking.dom.form = thisBooking.dom.wrapper.querySelector('.booking-form');
     thisBooking.dom.checkboxes = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
 
-}
+  }
 
   initWidgets() {
     const thisBooking = this;
@@ -202,9 +201,9 @@ class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDom();
     });
-}
+  }
 
-tableListener() {
+  tableListener() {
     const thisBooking = this;
 
     for (let table of thisBooking.dom.tables) {
@@ -329,7 +328,7 @@ tableListener() {
     thisBooking.dom.form.bgc.style.background = 'linear-gradient(to right,' + colorStyle + ')';
 
     console.log('colorStyle', colorStyle);
-}
+  }
 }
 
 export default Booking;
