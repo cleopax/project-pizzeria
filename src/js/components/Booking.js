@@ -227,6 +227,7 @@ class Booking {
     for (let checkbox of thisBooking.dom.checkboxes) {
       checkbox.addEventListener('click', function () {
         if (checkbox.checked == true) thisBooking.starters.push(checkbox.value);
+        else thisBooking.starters.splice(thisBooking.starters.indexOf(checkbox.value), 1);
       });
     }
   }
